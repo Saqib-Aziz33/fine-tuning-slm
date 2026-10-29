@@ -10,6 +10,7 @@ test_prompts = [
     "What is the capital of France?",
     "Explain LoRA in one sentence.",
     "Write a Python function to add two numbers.",
+    "What is GPxtsxLmp",
 ]
 
 for prompt in test_prompts:
