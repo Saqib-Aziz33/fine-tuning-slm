@@ -1,0 +1,2 @@
+{"messages": [{"role": "user", "content": "What is the capital of France?"}, {"role": "assistant", "content": "The capital of France is Paris."}]}
+{"messages": [{"role": "user", "content": "Explain LoRA in one sentence."}, {"role": "assistant", "content": "LoRA is a technique that freezes a model's original weights and trains small, low-rank matrices to adapt it efficiently."}]}
