@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model_name = "HuggingFaceTB/SmolLM2-135M-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float32)
+model = AutoModelForCausalLM.from_pretrained(model_name, dtype=torch.float32)
 
 # Define a few test prompts relevant to your task
 test_prompts = [
@@ -21,7 +21,7 @@ for prompt in test_prompts:
     
     with torch.no_grad():
         outputs = model.generate(
-            inputs,
+            **inputs,
             max_new_tokens=100,
             temperature=0.7,
             do_sample=True,
@@ -29,6 +29,8 @@ for prompt in test_prompts:
         )
     
     # Decode only the newly generated tokens
-    response = tokenizer.decode(outputs[0][inputs.shape[1]:], skip_special_tokens=True)
+    response = tokenizer.decode(
+        outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True
+    )
     print(f"Prompt: {prompt}")
     print(f"Base Model Response: {response}\n{'-'*50}")
