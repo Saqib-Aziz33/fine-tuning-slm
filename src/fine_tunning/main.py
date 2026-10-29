@@ -1,4 +1,6 @@
 # finetune.py
+from pathlib import Path
+
 import torch
 from datasets import load_dataset
 from transformers import (
@@ -13,7 +15,7 @@ from peft import LoraConfig, get_peft_model, TaskType
 # 1. Load a small model and tokenizer (e.g., SmolLM2-135M)
 model_name = "HuggingFaceTB/SmolLM2-135M-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float32)
+model = AutoModelForCausalLM.from_pretrained(model_name, dtype=torch.float32)
 
 # 2. Configure LoRA
 lora_config = LoraConfig(
@@ -27,7 +29,11 @@ model = get_peft_model(model, lora_config)
 model.print_trainable_parameters() # Should show a very small percentage
 
 # 3. Load and tokenize your dataset
-dataset = load_dataset("json", data_files="train.jsonl", split="train")
+dataset = load_dataset(
+    "json",
+    data_files=str(Path(__file__).with_name("train.jsonl")),
+    split="train",
+)
 
 def format_and_tokenize(example):
     # Convert the messages into a single string prompt
