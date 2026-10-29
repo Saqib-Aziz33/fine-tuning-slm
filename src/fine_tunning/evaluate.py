@@ -20,7 +20,7 @@ test_prompts = [
     "What is the capital of France?",
     "Explain LoRA in one sentence.",
     "Write a Python function to add two numbers.",
-    "What is GPxtsxLmp",
+    "What is royal power libre gpx?",
 ]
 
 
